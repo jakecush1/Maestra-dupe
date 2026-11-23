@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parola — Free real-time speech to text</title>
+  <meta name="description" content="Free, open-source, real-time speech-to-text that runs in your browser. No sign-up, no fees, and your audio never leaves your device.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%234f46e5'/%3E%3Cg stroke='%23fff' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M9 13v6M13.7 9.5v13M18.3 12v8M23 14.5v3'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="./" aria-label="Parola home">
+      <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true">
+        <rect width="32" height="32" rx="9" fill="currentColor"/>
+        <g stroke="#fff" stroke-width="2.6" stroke-linecap="round">
+          <path d="M9 13v6M13.7 9.5v13M18.3 12v8M23 14.5v3"/>
+        </g>
+      </svg>
+      <span>Parola</span>
+    </a>
+    <p class="top-note">Free <i>·</i> No sign-up <i>·</i> Open source</p>
+  </header>
+
+  <main id="stage">
+    <div class="column">
+      <div id="notice" class="notice" hidden></div>
+
+      <section id="hero" class="hero">
+        <h1>Speech to text,<br>as you speak.</h1>
+        <p class="lede">Press the microphone and start talking. Your words appear here in real time, with punctuation.</p>
+        <ul class="points">
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+            Free forever, no account
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+            Audio stays on your device
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+            English, Spanish, French, Italian
+          </li>
+        </ul>
+      </section>
+
+      <article id="transcript" class="transcript" aria-label="Transcript"></article>
+    </div>
+  </main>
+
+  <footer class="dock">
+    <div id="progress" class="progress" hidden><div id="progressBar"></div></div>
+
+    <div class="dock-inner">
+      <div class="dock-side dock-left">
+        <label class="field">
+          <span>Language</span>
+          <select id="language">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="it">Italiano</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Accuracy</span>
+          <select id="engine">
+            <option value="fast">Fast</option>
+            <option value="balanced">Balanced</option>
+            <option value="best">Best</option>
+            <option value="browser">Instant (online)</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="dock-center">
+        <button id="mic" class="mic" type="button" aria-pressed="false" aria-label="Start transcribing">
+          <span class="mic-ring" aria-hidden="true"></span>
+          <svg class="icon-mic" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="9" y="3" width="6" height="11" rx="3"/>
+            <path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3"/>
+          </svg>
+          <svg class="icon-stop" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="6" y="6" width="12" height="12" rx="2.6"/>
+          </svg>
+          <span class="spinner" aria-hidden="true"></span>
+        </button>
+        <p class="status">
+          <span id="statusText" role="status">Click the microphone to start</span>
+          <span id="timer" class="timer" hidden>00:00</span>
+        </p>
+      </div>
+
+      <div class="dock-side dock-right">
+        <button id="stamps" class="tool" type="button" aria-pressed="false" title="Show timestamps">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+          <span>Times</span>
+        </button>
+        <button id="copy" class="tool" type="button" title="Copy transcript">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8.5" y="8.5" width="11" height="11" rx="2.5"/><path d="M15.5 5.5h-8a2 2 0 0 0-2 2v8"/></svg>
+          <span>Copy</span>
+        </button>
+        <div class="menu">
+          <button id="download" class="tool" type="button" aria-haspopup="true" aria-expanded="false" title="Download transcript">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5v10.5M7.5 11l4.5 4.5 4.5-4.5M5.5 19.5h13"/></svg>
+            <span>Save</span>
+          </button>
+          <div id="downloadMenu" class="menu-list" hidden>
+            <button type="button" data-format="txt">Text file <small>.txt</small></button>
+            <button type="button" data-format="srt">Subtitles <small>.srt</small></button>
+          </div>
+        </div>
+        <button id="clear" class="tool" type="button" title="Clear transcript">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 7.5h13M10 7.5V5.5h4v2M7.5 7.5l.8 11h7.4l.8-11"/></svg>
+          <span>Clear</span>
+        </button>
+      </div>
+    </div>
+
+    <p id="privacy" class="privacy"></p>
+  </footer>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
