@@ -2,15 +2,21 @@
 
 Free, open-source, real-time speech-to-text in your browser.
 
+**Try it now: <https://maestra-dupe.vercel.app>**
+
 Press the microphone and talk. Your words appear as you speak, with punctuation and paragraphs. There is no account, no fee, and no server: speech recognition runs on your own computer, so your audio never leaves it.
 
 - **Languages:** English, Spanish, French, Italian
 - **Export:** copy to clipboard, save as `.txt`, or save as `.srt` subtitles
 - **Private:** the transcript is kept only in your browser, and survives a page reload
 
+## Use it online
+
+Open <https://maestra-dupe.vercel.app> in Chrome and press the microphone. Nothing to install.
+
 ## Run it on a Mac
 
-Double-click **`start.command`**. It opens Parola in Chrome at `http://localhost:8000`. Leave the Terminal window open while you use it.
+To run your own copy instead, double-click **`start.command`**. It opens Parola in Chrome at `http://localhost:8000`. Leave the Terminal window open while you use it.
 
 The first time you press the microphone, the speech models download (once) and are cached by the browser. After that they load from the cache in a few seconds.
 
@@ -70,7 +76,7 @@ There is no build step and there are no dependencies to install. The whole app i
 
 ## Put it online for free
 
-Parola is a static site, so any static host works: GitHub Pages, Cloudflare Pages, Netlify. Upload the folder as it is. The host must serve it over `https`, which all of these do.
+Parola is a static site, so any static host works. The live version at <https://maestra-dupe.vercel.app> is hosted on Vercel: import the GitHub repository with the framework preset set to "Other", no build command, and the project root as the output directory. GitHub Pages, Cloudflare Pages and Netlify work the same way. The host must serve it over `https`, which all of these do.
 
 ## Customising
 
